@@ -1,9 +1,14 @@
 import {Button, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../types';
+import {CompositeScreenProps} from '@react-navigation/native';
+import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+import type {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
+import {StackParamList, TabParamList} from '../../types';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Details'>;
+type Props = CompositeScreenProps<
+  NativeStackScreenProps<StackParamList, 'Details'>,
+  BottomTabScreenProps<TabParamList>
+>;
 
 const Details = ({route, navigation}: Props) => {
   const item = route.params?.item;

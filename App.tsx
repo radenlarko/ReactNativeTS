@@ -7,7 +7,7 @@ import {
 } from '@tanstack/react-query';
 import {NavigationContainer} from '@react-navigation/native';
 import {useAppState, useOnlineManager} from './src/hooks';
-import StackNavigation from './src/navigation/StackNavigation';
+import BottomTabNavigation from './src/navigation/BottomTabNavigation';
 
 function onAppStateChange(status: AppStateStatus) {
   // React Query already supports in web browser refetch on window focus by default
@@ -28,7 +28,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <NavigationContainer>
-        <StackNavigation />
+        <BottomTabNavigation />
       </NavigationContainer>
     </QueryClientProvider>
   );

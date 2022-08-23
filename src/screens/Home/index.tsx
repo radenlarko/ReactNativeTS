@@ -12,10 +12,10 @@ import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useQuery} from '@tanstack/react-query';
 import {getPost} from '../../utils/fetchApi';
 import {useRefreshByUser, useRefreshOnFocus} from '../../hooks';
-import {RootStackParamList, Item} from '../../types';
+import {StackParamList, Item} from '../../types';
 import {Divider, ErrorMessage, LoadingIndicator} from '../../components';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+type Props = NativeStackScreenProps<StackParamList, 'Home'>;
 
 interface ListProps {
   item: Item;
@@ -27,8 +27,10 @@ type OnListItemPress = (item: Item) => void;
 const ListItem = ({item, onPress}: ListProps) => {
   return (
     <TouchableOpacity onPress={onPress}>
-      <Text style={{fontWeight: "bold"}}>{`[${item.id}]`} User Id: {item.userId}</Text>
-      <Text style={{fontSize: 12, color: "gray"}}>{item.title}</Text>
+      <Text style={{fontWeight: 'bold'}}>
+        {`[${item.id}]`} User Id: {item.userId}
+      </Text>
+      <Text style={{fontSize: 12, color: 'gray'}}>{item.title}</Text>
     </TouchableOpacity>
   );
 };
@@ -77,7 +79,8 @@ const Home = ({navigation}: Props) => {
             onRefresh={refetchByUser}
           />
         }
-        style={{marginTop: 20}} />
+        style={{marginTop: 20}}
+      />
     </View>
   );
 };
