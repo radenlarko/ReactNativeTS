@@ -1,14 +1,83 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { getPost } from '../../utils/fetchApi';
+import {
+  FlatList,
+  GestureResponderEvent,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, {useCallback} from 'react';
+import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {useQuery} from '@tanstack/react-query';
+import {getPost} from '../../utils/fetchApi';
+import {useRefreshByUser, useRefreshOnFocus} from '../../hooks';
+import {RootStackParamList, Item} from '../../types';
+import {Divider, ErrorMessage, LoadingIndicator} from '../../components';
 
-const Home = () => {
-  const {data} = useQuery(["posts"], getPost);
-  console.log(data);
+type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+interface ListProps {
+  item: Item;
+  onPress?: (event: GestureResponderEvent) => void;
+}
+
+type OnListItemPress = (item: Item) => void;
+
+const ListItem = ({item, onPress}: ListProps) => {
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <Text style={{fontWeight: "bold"}}>{`[${item.id}]`} User Id: {item.userId}</Text>
+      <Text style={{fontSize: 12, color: "gray"}}>{item.title}</Text>
+    </TouchableOpacity>
+  );
+};
+
+const Home = ({navigation}: Props) => {
+  const {isLoading, error, data, refetch} = useQuery<Item[], Error>(
+    ['posts'],
+    getPost,
+    {
+      onSuccess: data => console.log('success: ', data.length),
+    },
+  );
+
+  const {isRefetchingByUser, refetchByUser} = useRefreshByUser(refetch);
+  useRefreshOnFocus(refetch);
+
+  const onListItemPress = useCallback<OnListItemPress>(
+    item => {
+      navigation.navigate('Details', {item});
+    },
+    [navigation],
+  );
+
+  const renderItem = useCallback(
+    ({item}: {item: Item}) => {
+      return <ListItem item={item} onPress={() => onListItemPress(item)} />;
+    },
+    [onListItemPress],
+  );
+
+  if (isLoading) return <LoadingIndicator />;
+
+  if (error) return <ErrorMessage message={error.message} />;
+
   return (
     <View style={styles.container}>
       <Text>Home Hello World</Text>
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={item => item.title}
+        ItemSeparatorComponent={() => <Divider gap={14} />}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefetchingByUser}
+            onRefresh={refetchByUser}
+          />
+        }
+        style={{marginTop: 20}} />
     </View>
   );
 };
@@ -20,5 +89,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 20,
+    paddingTop: 10,
   },
 });
