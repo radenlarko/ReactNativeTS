@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Button, StatusBar} from 'react-native';
+import {View, StyleSheet, Button, StatusBar, Alert} from 'react-native';
 import {
   useForm,
   SubmitHandler,
@@ -43,6 +43,7 @@ const TestForm = () => {
 
   const onSubmit: SubmitHandler<Inputs> = data => {
     console.log(data);
+    Alert.alert("Success", `Your data: ${JSON.stringify(data)}`)
   };
 
   console.log('errors', errors);
