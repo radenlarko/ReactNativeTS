@@ -1,4 +1,4 @@
-package com.adyawinsaappv2.newarchitecture.components;
+package com.reactnativets.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

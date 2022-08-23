@@ -1,4 +1,4 @@
-package com.adyawinsaappv2.newarchitecture;
+package com.reactnativets.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.adyawinsaappv2.BuildConfig;
-import com.adyawinsaappv2.newarchitecture.components.MainComponentsRegistry;
-import com.adyawinsaappv2.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.reactnativets.BuildConfig;
+import com.reactnativets.newarchitecture.components.MainComponentsRegistry;
+import com.reactnativets.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
