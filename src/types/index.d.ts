@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export interface Item {
   userId: number;
@@ -10,4 +10,5 @@ export interface Item {
 export type RootStackParamList = {
   Home: undefined;
   Details: {item: Item} | undefined;
+  TestForm: undefined;
 };

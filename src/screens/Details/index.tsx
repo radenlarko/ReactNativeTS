@@ -11,7 +11,18 @@ const Details = ({route, navigation}: Props) => {
     <View style={styles.container}>
       <Text>Details</Text>
       <Text>{JSON.stringify(item, null, 2)}</Text>
-      <Button color="teal" title="go to home" onPress={() => navigation.navigate('Home')} />
+      <View style={styles.buttonContainer}>
+        <Button
+          color="teal"
+          title="go to home"
+          onPress={() => navigation.navigate('Home')}
+        />
+        <Button
+          color="tomato"
+          title="fill form"
+          onPress={() => navigation.navigate('TestForm')}
+        />
+      </View>
     </View>
   );
 };
@@ -23,5 +34,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 20,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    marginVertical: 4,
   },
 });
