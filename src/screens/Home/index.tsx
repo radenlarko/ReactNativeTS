@@ -7,14 +7,20 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useCallback} from 'react';
+import React, {useCallback, useContext} from 'react';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useQuery} from '@tanstack/react-query';
 import {getPost} from '../../utils/fetchApi';
 import {useRefreshByUser, useRefreshOnFocus} from '../../hooks';
 import {StackParamList, Item} from '../../types';
-import {Divider, ErrorMessage, LoadingIndicator} from '../../components';
+import {
+  ButtonRounded,
+  Divider,
+  ErrorMessage,
+  LoadingIndicator,
+} from '../../components';
 import Feather from 'react-native-vector-icons/Feather';
+import {AuthContext} from '../../store/AuthContext';
 
 type Props = NativeStackScreenProps<StackParamList, 'Home'>;
 
@@ -48,6 +54,8 @@ const Home = ({navigation}: Props) => {
   const {isRefetchingByUser, refetchByUser} = useRefreshByUser(refetch);
   useRefreshOnFocus(refetch);
 
+  const {signOut} = useContext(AuthContext);
+
   const onListItemPress = useCallback<OnListItemPress>(
     item => {
       navigation.navigate('Details', {item});
@@ -70,6 +78,7 @@ const Home = ({navigation}: Props) => {
     <View style={styles.container}>
       <Text>Home Hello World</Text>
       <Feather name="airplay" size={20} color="tomato" />
+      <ButtonRounded icon="log-out" title="Logout" onPress={signOut} />
       <FlatList
         data={data}
         renderItem={renderItem}

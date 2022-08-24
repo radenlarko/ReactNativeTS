@@ -43,7 +43,7 @@ const TestForm = () => {
 
   const onSubmit: SubmitHandler<Inputs> = data => {
     console.log(data);
-    Alert.alert("Success", `Your data: ${JSON.stringify(data)}`)
+    Alert.alert('Success', `Your data: ${JSON.stringify(data)}`);
   };
 
   console.log('errors', errors);
@@ -54,6 +54,7 @@ const TestForm = () => {
         control={control}
         render={({field: {onChange, onBlur, value}}) => (
           <MyTextInput
+            icon="user"
             label="First Namex"
             placeholder="input firstname"
             onBlur={onBlur}
@@ -70,6 +71,7 @@ const TestForm = () => {
         control={control}
         render={({field: {onChange, onBlur, value}}) => (
           <MyTextInput
+            icon="user"
             label="Last Name"
             placeholder="input lastname"
             onBlur={onBlur}
