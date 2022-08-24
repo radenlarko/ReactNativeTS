@@ -14,6 +14,7 @@ import {getPost} from '../../utils/fetchApi';
 import {useRefreshByUser, useRefreshOnFocus} from '../../hooks';
 import {StackParamList, Item} from '../../types';
 import {Divider, ErrorMessage, LoadingIndicator} from '../../components';
+import Feather from 'react-native-vector-icons/Feather';
 
 type Props = NativeStackScreenProps<StackParamList, 'Home'>;
 
@@ -68,6 +69,7 @@ const Home = ({navigation}: Props) => {
   return (
     <View style={styles.container}>
       <Text>Home Hello World</Text>
+      <Feather name="airplay" size={20} color="tomato" />
       <FlatList
         data={data}
         renderItem={renderItem}
